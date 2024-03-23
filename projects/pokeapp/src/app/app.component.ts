@@ -2,17 +2,18 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './features/shared/header/header.component';
 import { FooterComponent } from './features/shared/footer/footer.component';
+import { MenuComponent } from './features/shared/menu/menu.component';
 
 @Component({
   selector: 'isdi-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MenuComponent],
   template: `
     <isdi-header />
-    <main></main>
+    <main>
+      <router-outlet />
+    </main>
     <isdi-footer />
-
-    <router-outlet />
   `,
   styles: `
   main {
