@@ -26,15 +26,11 @@ El usuario debe poder añadir los pokémon que quiera a su listado local. El lis
 
 Desde los favoritos, también se puede acceder a la página de detalle.
 
-## Features
+## Catálogo de responsabilidades de componentes
 
-Opcional: BEM + sass
-Vite
-HTML semántico
-Testing
+Servicio: PokeapiRepoService -> Obtiene los pokémon de la API y los pasa a los componentes. No tiene interacción con el usuario.
 
-Pista Promise.all(), Promise.race(pn)...
+Componentes:
 
-```
-
-```
+- PokeList
+- PokeItem

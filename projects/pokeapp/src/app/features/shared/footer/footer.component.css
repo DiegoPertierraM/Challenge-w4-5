@@ -1,0 +1,12 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  text-align: center;
+  background-color: #ff603c;
+
+  address {
+    color: #fff8da;
+  }
+}
