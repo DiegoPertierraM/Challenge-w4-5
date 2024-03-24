@@ -11,7 +11,7 @@ describe('PokeCardComponent', () => {
       imports: [PokeCardComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(PokeCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
