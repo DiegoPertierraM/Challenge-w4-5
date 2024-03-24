@@ -14,8 +14,16 @@ export class PokeapiRepoService {
 
   constructor(private http: HttpClient) {}
 
-  getPokemonResponse(): Observable<PokemonResponse> {
-    return this.http.get<PokemonResponse>(this.pokeUrl);
+  getPokemonResponse(offset: number = 0): Observable<PokemonResponse> {
+    if (!offset) {
+      return this.http.get<PokemonResponse>(this.pokeUrl);
+    } else {
+      const nextUrl = new URL(
+        `?offset=${offset}&limit=20`,
+        this.pokeUrl
+      ).toString();
+      return this.http.get<PokemonResponse>(nextUrl);
+    }
   }
 
   getPokemonDetails(url: string): Observable<Pokemon> {

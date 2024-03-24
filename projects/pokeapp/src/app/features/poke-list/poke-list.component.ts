@@ -8,6 +8,12 @@ import { PokeCardComponent } from '../poke-card/poke-card.component';
   standalone: true,
   imports: [PokeCardComponent],
   template: `
+    <div class="btns">
+      <button class="prev-btn" (click)="previousPokemon(offset)">
+        Previous
+      </button>
+      <button class="next-btn" (click)="nextPokemon(offset)">Next</button>
+    </div>
     <ul class="poke-list">
       @for (pokemon of pokemonList; track $index) {
       <isdi-poke-card [pokeInfo]="pokemon" />
@@ -19,10 +25,16 @@ import { PokeCardComponent } from '../poke-card/poke-card.component';
 export default class PokeListComponent implements OnInit {
   pokemonBase: PokemonBase[] = [];
   pokemonList: Pokemon[] = [];
+  offset = 0;
 
   constructor(private pokeapiRepoService: PokeapiRepoService) {}
 
   ngOnInit(): void {
+    this.initialPokemon();
+    console.log(this.offset);
+  }
+
+  initialPokemon() {
     this.pokeapiRepoService.getPokemonResponse().subscribe({
       next: (data) => {
         data.results.map(async (pokemon) => {
@@ -34,5 +46,33 @@ export default class PokeListComponent implements OnInit {
         });
       },
     });
+  }
+
+  loadNewPokemon(offset: number) {
+    this.pokemonList = [];
+    this.pokeapiRepoService.getPokemonResponse(offset).subscribe({
+      next: (data) => {
+        data.results.map(async (pokemon) => {
+          this.pokeapiRepoService.getPokemonDetails(pokemon.url).subscribe({
+            next: (data: Pokemon) => {
+              this.pokemonList = [...this.pokemonList, data];
+            },
+          });
+        });
+      },
+    });
+  }
+
+  nextPokemon(offset: number) {
+    this.offset += 20;
+    console.log(offset);
+    this.loadNewPokemon(this.offset);
+  }
+
+  previousPokemon(offset: number) {
+    if (offset <= 0) return;
+    this.offset -= 20;
+    console.log(offset);
+    this.loadNewPokemon(this.offset);
   }
 }
