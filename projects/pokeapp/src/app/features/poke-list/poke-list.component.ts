@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PokeapiRepoService } from '../../core/services/pokeapi/pokeapi.repo.service';
 import { Pokemon, PokemonBase } from '../../core/models/pokeModel';
@@ -16,7 +17,7 @@ import { PokeCardComponent } from '../poke-card/poke-card.component';
     </div>
     <ul class="poke-list">
       @for (pokemon of pokemonList; track $index) {
-      <isdi-poke-card [pokeInfo]="pokemon" />
+      <isdi-poke-card [pokeInfo]="pokemon" (click)="goToDetails(pokemon.id)" />
       }
     </ul>
   `,
@@ -27,7 +28,10 @@ export default class PokeListComponent implements OnInit {
   pokemonList: Pokemon[] = [];
   offset = 0;
 
-  constructor(private pokeapiRepoService: PokeapiRepoService) {}
+  constructor(
+    private pokeapiRepoService: PokeapiRepoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initialPokemon();
@@ -37,7 +41,7 @@ export default class PokeListComponent implements OnInit {
   initialPokemon() {
     this.pokeapiRepoService.getPokemonResponse().subscribe({
       next: (data) => {
-        data.results.map(async (pokemon) => {
+        data.results.map((pokemon) => {
           this.pokeapiRepoService.getPokemonDetails(pokemon.url).subscribe({
             next: (data: Pokemon) => {
               this.pokemonList = [...this.pokemonList, data];
@@ -52,7 +56,7 @@ export default class PokeListComponent implements OnInit {
     this.pokemonList = [];
     this.pokeapiRepoService.getPokemonResponse(offset).subscribe({
       next: (data) => {
-        data.results.map(async (pokemon) => {
+        data.results.map((pokemon) => {
           this.pokeapiRepoService.getPokemonDetails(pokemon.url).subscribe({
             next: (data: Pokemon) => {
               this.pokemonList = [...this.pokemonList, data];
@@ -74,5 +78,9 @@ export default class PokeListComponent implements OnInit {
     this.offset -= 20;
     console.log(offset);
     this.loadNewPokemon(this.offset);
+  }
+
+  goToDetails(id: number) {
+    this.router.navigate([`/poke_details/${id}`]);
   }
 }

@@ -1,55 +1,79 @@
-.poke-card {
-  font-family: 'VT323', monospace;
-  font-size: 1.4rem;
+:host {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 200px;
-  padding: 1rem;
+}
+
+.poke-details {
+  font-family: 'Roboto Mono', monospace;
   background-color: white;
+  max-width: 800px;
+  margin-block-start: 3rem;
+  padding: 1rem;
+  font-size: 1.2rem;
   border-radius: 0.2rem;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-.poke-card > ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.2rem;
+li {
+  margin-block: 0.3rem;
 }
 
-.poke-img img {
-  width: 150px;
+h2,
+span {
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .poke-name {
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .poke-name::first-letter {
   text-transform: capitalize;
 }
 
-.id-favourite-row {
+.poke-sprites {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-fa-icon {
-  cursor: pointer;
+.poke-img img {
+  width: 180px;
 }
 
 .poke-types {
   display: flex;
+  gap: 0.2rem;
 }
 
 .poke-type {
-  width: 100%;
   text-align: center;
   padding: 5px;
 }
+
+.poke-abilities span {
+  margin-inline-end: 2.5rem;
+  text-transform: capitalize;
+  font-weight: 400;
+  border: 1px solid black;
+  padding: 0.4rem;
+}
+
+.poke-abilities span:first-of-type {
+  position: relative;
+}
+
+.poke-abilities span:first-of-type:after {
+  border-right: 3px solid black;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -20%;
+}
+
+/* Estilos para los contenedores de tipos */
 
 .normal {
   color: white;

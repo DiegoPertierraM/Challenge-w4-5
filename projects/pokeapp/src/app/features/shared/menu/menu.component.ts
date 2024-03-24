@@ -11,9 +11,11 @@ import { MenuOption } from '../../../core/types/menu-option';
       <ul>
         @for (item of items; track $index) {
         <li>
+          @if (item.path !== 'poke_details/:id') {
           <a [routerLink]="item.path" routerLinkActive="active">{{
             item.title
           }}</a>
+          }
         </li>
         }
       </ul>

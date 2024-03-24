@@ -20,24 +20,36 @@ import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
         <li>
           <ul class="id-favourite-row">
             <li>#{{ pokeInfo.id }}</li>
-            <li><fa-icon [icon]="faHeart"></fa-icon></li>
+            <li>
+              @if (!pokeInfo.isFavorite) {
+              <fa-icon
+                [icon]="faHeart"
+                (click)="pokeInfo.isFavorite = true"
+              ></fa-icon>
+              } @else {
+              <fa-icon
+                [icon]="faHeartSolid"
+                (click)="pokeInfo.isFavorite = false"
+              ></fa-icon>
+              }
+            </li>
           </ul>
         </li>
         <li class="poke-name">{{ pokeInfo.name }}</li>
-        <li>
+        <li class="poke-types-container">
           <ul class="poke-types">
             <li
               class="poke-type"
-              [class.grass]="pokeInfo.types[0].type.name === 'grass'"
+              [class]="chooseType(pokeInfo.types[0].type.name)"
             >
-              {{ pokeInfo.types[0].type.name }}
+              {{ pokeInfo.types[0].type.name.toUpperCase() }}
             </li>
             @if (pokeInfo.types[1]) {
             <li
               class="poke-type"
-              [class.poison]="pokeInfo.types[1].type.name === 'poison'"
+              [class]="chooseType(pokeInfo.types[1].type.name)"
             >
-              {{ pokeInfo.types[1].type.name }}
+              {{ pokeInfo.types[1].type.name.toUpperCase() }}
             </li>
             }
           </ul>
@@ -54,5 +66,48 @@ export class PokeCardComponent {
   faHeart = faHeart;
   faHeartSolid = faHeartSolid;
 
-  chooseType() {}
+  chooseType(type: string): string {
+    switch (type) {
+      case 'normal':
+        return 'normal';
+      case 'fire':
+        return 'fire';
+      case 'water':
+        return 'water';
+      case 'electric':
+        return 'electric';
+      case 'grass':
+        return 'grass';
+      case 'ice':
+        return 'ice';
+      case 'fighting':
+        return 'fighting';
+      case 'poison':
+        return 'poison';
+      case 'ground':
+        return 'ground';
+      case 'flying':
+        return 'flying';
+      case 'psychic':
+        return 'psychic';
+      case 'bug':
+        return 'bug';
+      case 'rock':
+        return 'rock';
+      case 'ghost':
+        return 'ghost';
+      case 'dragon':
+        return 'dragon';
+      case 'dark':
+        return 'dark';
+      case 'steel':
+        return 'steel';
+      case 'fairy':
+        return 'fairy';
+      case 'stellar':
+        return 'stellar';
+      default:
+        return '';
+    }
+  }
 }
