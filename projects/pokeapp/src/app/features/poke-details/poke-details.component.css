@@ -6,9 +6,9 @@
 .poke-details {
   font-family: 'Roboto Mono', monospace;
   background-color: white;
-  max-width: 800px;
+  max-width: 900px;
   margin-block-start: 3rem;
-  padding: 1rem;
+  padding: 1rem 2rem;
   font-size: 1.2rem;
   border-radius: 0.2rem;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -73,6 +73,35 @@ span {
   right: -20%;
 }
 
+.awful {
+  color: red;
+}
+
+.low {
+  color: rgb(253, 195, 86);
+}
+
+.mid {
+  color: rgb(214, 202, 26);
+}
+
+.high {
+  color: rgb(76, 211, 76);
+}
+
+.goated {
+  color: rgb(11, 139, 43);
+}
+
+.poke-stat::first-letter {
+  text-transform: capitalize;
+}
+
+fa-icon {
+  font-size: 2.5rem;
+  color: #3b5ca8;
+  cursor: pointer;
+}
 /* Estilos para los contenedores de tipos */
 
 .normal {
