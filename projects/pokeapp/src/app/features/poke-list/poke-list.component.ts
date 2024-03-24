@@ -68,15 +68,16 @@ export default class PokeListComponent implements OnInit {
   }
 
   nextPokemon(offset: number) {
+    if (offset >= 1300) return;
     this.offset += 20;
-    console.log(offset);
+    console.log(this.offset);
     this.loadNewPokemon(this.offset);
   }
 
   previousPokemon(offset: number) {
     if (offset <= 0) return;
     this.offset -= 20;
-    console.log(offset);
+    console.log(this.offset);
     this.loadNewPokemon(this.offset);
   }
 
