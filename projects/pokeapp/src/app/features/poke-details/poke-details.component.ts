@@ -115,6 +115,11 @@ import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
               pokemon.stats[5].base_stat
             }}</span>
           </li>
+          <hr />
+          <li class="poke-stat">
+            <span>Total:</span>
+            <span> {{ calcTotalStats(pokemon.stats) }}</span>
+          </li>
         </ul>
       </li>
     </ul>
@@ -196,7 +201,7 @@ export default class PokeDetailsComponent implements OnInit {
     }
   }
 
-  chooseStatColor(stat: number) {
+  chooseStatColor(stat: number): string {
     if (stat < 50) {
       return 'awful';
     } else if (stat < 70) {
@@ -208,5 +213,13 @@ export default class PokeDetailsComponent implements OnInit {
     } else {
       return 'goated';
     }
+  }
+
+  calcTotalStats(stats: any): number {
+    let total = 0;
+    for (const stat of stats) {
+      total += stat.base_stat;
+    }
+    return total;
   }
 }
