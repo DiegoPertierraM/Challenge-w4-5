@@ -1,0 +1,41 @@
+.poke-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  padding: 1rem;
+  border: 1px solid black;
+}
+
+.poke-img img {
+  width: 150px;
+}
+
+.poke-name::first-letter {
+  text-transform: capitalize;
+}
+
+.id-favourite-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.poke-types {
+  display: flex;
+}
+
+.poke-type {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.grass {
+  color: white;
+  background-color: rgb(58, 150, 58);
+}
+
+.poison {
+  color: white;
+  background-color: rgb(95, 20, 89);
+}

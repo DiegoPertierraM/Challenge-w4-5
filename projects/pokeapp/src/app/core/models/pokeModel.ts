@@ -12,6 +12,7 @@ export interface PokemonBase {
 
 export interface Pokemon extends PokemonBase {
   id: number;
+  types: Type[];
   height: number;
   weight: number;
   sprites: Sprites;

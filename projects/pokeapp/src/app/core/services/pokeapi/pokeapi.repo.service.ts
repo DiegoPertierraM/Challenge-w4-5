@@ -1,17 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { Pokemon, PokemonBase, PokemonResponse } from '../../models/pokeModel';
+
+const baseUrl = 'https://pokeapi.co/api/v2/';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PokeapiRepoService {
-  baseUrl = 'https://pokeapi.co/api/v2/';
+  private pokeUrl = new URL('pokemon', baseUrl).toString();
+  pokemonList: Pokemon[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
 
-    getPokemonData() {
-      return this.http.get(`${this.baseUrl}/pokemon`);
-    }
+  getPokemonResponse(): Observable<PokemonResponse> {
+    return this.http.get<PokemonResponse>(this.pokeUrl);
   }
+
+  getPokemonDetails(url: string): Observable<Pokemon> {
+    return this.http.get<Pokemon>(url);
+  }
+  // if (offset === 0) {
+
+  // }
 }
