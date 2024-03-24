@@ -1,15 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Pokemon, PokemonBase, PokemonResponse } from '../../models/pokeModel';
+import {
+  Pokemon,
+  PokemonBase,
+  PokemonDetails,
+  PokemonResponse,
+} from '../../models/pokeModel';
 
-const baseUrl = 'https://pokeapi.co/api/v2/';
+// const baseUrl = 'https://pokeapi.co/api/v2/';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PokeapiRepoService {
-  private pokeUrl = new URL('pokemon', baseUrl).toString();
+  private pokeUrl = 'https://pokeapi.co/api/v2/pokemon';
   pokemonList: Pokemon[] = [];
 
   constructor(private http: HttpClient) {}
@@ -28,6 +33,11 @@ export class PokeapiRepoService {
 
   getPokemonDetails(url: string): Observable<Pokemon> {
     return this.http.get<Pokemon>(url);
+  }
+
+  getPokemonById(id: number) {
+    const idUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    return this.http.get<PokemonDetails>(idUrl);
   }
   // if (offset === 0) {
 

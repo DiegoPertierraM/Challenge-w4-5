@@ -12,5 +12,11 @@ export const routes: Routes = [
     title: 'MY POKEMON',
     loadComponent: () => import('./features/my-pokemon/my-pokemon.component'),
   },
+  {
+    path: 'poke_details/:id',
+    title: 'POKEMONS DETAILS',
+    loadComponent: () =>
+      import('./features/poke-details/poke-details.component'),
+  },
   { path: '**', redirectTo: 'poke_list' },
 ];
