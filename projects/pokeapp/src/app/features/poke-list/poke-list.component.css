@@ -1,16 +1,18 @@
 .poke-list {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
+  gap: 1.5rem;
   flex-wrap: wrap;
-  margin: 1rem;
+  margin: 1.5rem;
 }
 
 .btns {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
   margin-block: 2rem;
+  margin-inline: 2rem;
 
   button {
     font-family: 'Press Start 2P', system-ui;
@@ -21,6 +23,7 @@
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 0.2rem;
     transition: 0.25s background-color;
 
     &:hover {
