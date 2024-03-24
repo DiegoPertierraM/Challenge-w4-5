@@ -1,0 +1,30 @@
+.poke-list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-block: 2rem;
+
+  button {
+    font-family: 'Press Start 2P', system-ui;
+    width: 150px;
+    height: 40px;
+    font-size: 1rem;
+    background-color: #ff603c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s background-color;
+
+    &:hover {
+      background-color: #ffcb05;
+    }
+  }
+}
