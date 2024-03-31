@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokeapiRepoService } from '../../core/services/pokeapi/pokeapi.repo.service';
 import { Pokemon, PokemonBase } from '../../core/models/pokeModel';
 import { PokeCardComponent } from '../poke-card/poke-card.component';
+import { PokeService } from '../../core/services/poke-service/poke.service';
 
 @Component({
   selector: 'isdi-poke-list',
@@ -30,26 +31,16 @@ export default class PokeListComponent implements OnInit {
 
   constructor(
     private pokeapiRepoService: PokeapiRepoService,
+    private pokeSrv: PokeService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.initialPokemon();
-    console.log(this.offset);
-  }
-
-  initialPokemon() {
-    this.pokeapiRepoService.getPokemonResponse().subscribe({
-      next: (data) => {
-        data.results.map((pokemon) => {
-          this.pokeapiRepoService.getPokemonDetails(pokemon.url).subscribe({
-            next: (data: Pokemon) => {
-              this.pokemonList = [...this.pokemonList, data];
-            },
-          });
-        });
-      },
+    this.pokeSrv.pokemon.subscribe((pokemonList) => {
+      this.pokemonList = pokemonList;
+      console.log(this.pokemonList);
     });
+    console.log(this.offset);
   }
 
   loadNewPokemon(offset: number) {
