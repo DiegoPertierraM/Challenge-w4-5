@@ -38,7 +38,4 @@ export class PokeapiRepoService {
     const idUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
     return this.http.get<PokemonDetails>(idUrl);
   }
-  // if (offset === 0) {
-
-  // }
 }
