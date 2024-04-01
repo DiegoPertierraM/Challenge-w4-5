@@ -11,10 +11,8 @@ import { PokeService } from '../../core/services/poke-service/poke.service';
   imports: [PokeCardComponent],
   template: `
     <div class="btns">
-      <button class="prev-btn" (click)="previousPokemon(offset)">
-        Previous
-      </button>
-      <button class="next-btn" (click)="nextPokemon(offset)">Next</button>
+      <button class="prev-btn" (click)="previousPokemon()">Previous</button>
+      <button class="next-btn" (click)="nextPokemon()">Next</button>
     </div>
     <ul class="poke-list">
       @for (pokemon of pokemonList; track $index) {
@@ -27,49 +25,31 @@ import { PokeService } from '../../core/services/poke-service/poke.service';
 export default class PokeListComponent implements OnInit {
   pokemonBase: PokemonBase[] = [];
   pokemonList: Pokemon[] = [];
-  offset = 0;
+  // offset = 0;
 
   constructor(
-    private pokeapiRepoService: PokeapiRepoService,
     private pokeSrv: PokeService,
-    private router: Router
+    private router: Router,
+    private pokeApiSrv: PokeapiRepoService
   ) {}
 
   ngOnInit(): void {
-    this.pokeSrv.pokemon.subscribe((pokemonList) => {
-      this.pokemonList = pokemonList;
+    this.pokeSrv.pokemon.subscribe((pokeList) => {
+      this.pokemonList = pokeList;
       console.log(this.pokemonList);
     });
-    console.log(this.offset);
   }
 
-  loadNewPokemon(offset: number) {
-    this.pokemonList = [];
-    this.pokeapiRepoService.getPokemonResponse(offset).subscribe({
-      next: (data) => {
-        data.results.map((pokemon) => {
-          this.pokeapiRepoService.getPokemonDetails(pokemon.url).subscribe({
-            next: (data: Pokemon) => {
-              this.pokemonList = [...this.pokemonList, data];
-            },
-          });
-        });
-      },
-    });
+  nextPokemon() {
+    this.pokeSrv.nextPokemon();
+    console.log(this.pokemonList);
+    console.log(this.pokeApiSrv.offset);
   }
 
-  nextPokemon(offset: number) {
-    if (offset >= 1300) return;
-    this.offset += 20;
-    console.log(this.offset);
-    this.loadNewPokemon(this.offset);
-  }
-
-  previousPokemon(offset: number) {
-    if (offset <= 0) return;
-    this.offset -= 20;
-    console.log(this.offset);
-    this.loadNewPokemon(this.offset);
+  previousPokemon() {
+    this.pokeSrv.previousPokemon();
+    console.log(this.pokemonList);
+    console.log(this.pokeApiSrv.offset);
   }
 
   goToDetails(id: number) {

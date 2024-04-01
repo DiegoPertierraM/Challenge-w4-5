@@ -15,19 +15,15 @@ import {
 export class PokeapiRepoService {
   private pokeUrl = 'https://pokeapi.co/api/v2/pokemon';
   pokemonList: Pokemon[] = [];
+  offset = 0;
+  limit = 20;
 
   constructor(private http: HttpClient) {}
 
-  getPokemonResponse(offset: number = 0): Observable<PokemonResponse> {
-    if (!offset) {
-      return this.http.get<PokemonResponse>(this.pokeUrl);
-    } else {
-      const nextUrl = new URL(
-        `?offset=${offset}&limit=20`,
-        this.pokeUrl
-      ).toString();
-      return this.http.get<PokemonResponse>(nextUrl);
-    }
+  getPokemonList(): Observable<PokemonResponse> {
+    return this.http.get<PokemonResponse>(
+      `https://pokeapi.co/api/v2/pokemon?limit=${this.limit}&offset=${this.offset}`
+    );
   }
 
   getPokemonDetails(url: string): Observable<Pokemon> {
